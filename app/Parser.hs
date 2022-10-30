@@ -17,10 +17,7 @@ data Stm
     | Skip
         deriving Show
 
-tokenize :: [Char] -> Either ParseError [Stm]
-tokenize = parse program ""
-
-program = sepEndBy stm (char ';') <* eof
+parseProgram = parse (sepEndBy stm (char ';') <* eof) ""
 
 stm =   try assignment
     <|> try skip
